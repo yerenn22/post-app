@@ -4,9 +4,9 @@ __pycache__
 # postgres
 data
 
-# virtualenv
-env
-venv
-
 # code style
 .flake8
+
+# static files
+media
+static
