@@ -24,7 +24,14 @@ class CustomUserAdmin(UserAdmin):
 
     fieldsets = ((None, {"fields": ("email", "username", "role", "password")}),)
 
-    list_display = ("email", "username", "role", "is_active", "is_staff", "is_superuser")
+    list_display = (
+        "email",
+        "username",
+        "role",
+        "is_active",
+        "is_staff",
+        "is_superuser",
+    )
 
     search_fields = ("username", "email")
     ordering = ("username",)
