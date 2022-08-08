@@ -7,6 +7,7 @@ from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 from rest_framework import permissions, routers
 
+from apps.post.views import PostViewSet
 from apps.user.views import UserViewSet
 
 schema_view = get_schema_view(
@@ -21,6 +22,7 @@ schema_view = get_schema_view(
 
 router = routers.DefaultRouter()
 
+router.register(r"posts", PostViewSet, basename="posts")
 router.register(r"users", UserViewSet, basename="users")
 
 urlpatterns = [

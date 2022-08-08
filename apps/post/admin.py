@@ -3,8 +3,12 @@ from django.contrib import admin
 from .models import Post, Image
 
 
-class PostAdmin(admin.ModelAdmin):
-    model = Post
+class ImageInline(admin.TabularInline):
+    model = Image
+
+
+class PostImageAdmin(admin.ModelAdmin):
+    inlines = [ImageInline]
 
     add_fieldsets = (
         (
@@ -25,5 +29,4 @@ class PostAdmin(admin.ModelAdmin):
     ordering = ("-created_at",)
 
 
-admin.site.register(Post)
-admin.site.register(Image)
+admin.site.register(Post, PostImageAdmin)

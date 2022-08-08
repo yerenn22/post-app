@@ -42,7 +42,7 @@ class Image(models.Model):
     )
 
     def __str__(self):
-        return self.id
+        return self.post.title
 
     class Meta:
         db_table = "images"
