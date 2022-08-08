@@ -1,0 +1,9 @@
+# python binary
+__pycache__
+
+# postgres
+data
+
+# virtualenv
+env
+venv

@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  db:
+    container_name: yoko-postgres
+    image: postgres
+    command: postgres -c stats_temp_directory=/tmp
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=yoko
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    restart: always
+
+  backend:
+    build: .
+    container_name: yoko-backend
+    image: backend
+    command: bash -c "python manage.py database_connection &&
+                      python manage.py migrate &&
+                      python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/app
+    ports:
+      - '8000:8000'
+    env_file:
+      - .env
+    depends_on:
+      - db
