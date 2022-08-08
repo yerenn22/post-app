@@ -1,4 +1,4 @@
-# Yoko - Assessment Technical Task
+# Yoko - Technical Task
 
 ## Table of contents
 
@@ -36,7 +36,7 @@ git clone https://github.com/yerenn22/yoko-post-app
 cd yoko-post-app
 ```
 
-3. Run the server
+3. Run the application
 
 ```bash
 docker-compose build
