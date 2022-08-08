@@ -7,3 +7,6 @@ data
 # virtualenv
 env
 venv
+
+# code style
+.flake8
