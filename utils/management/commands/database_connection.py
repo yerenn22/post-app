@@ -19,7 +19,7 @@ class Command(BaseCommand):
                 connection.ensure_connection()
                 db_connected = True
             except Error:
-                self.log_console("Database unavailable, waiting 1 second...")
+                self.log_console("Database unavailable, waiting 2 second...")
                 time.sleep(2)
 
         self.log_console("Database available!")
