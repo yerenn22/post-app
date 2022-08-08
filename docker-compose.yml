@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   db:
-    container_name: yoko-postgres
+    container_name: postgres
     image: postgres
     command: postgres -c stats_temp_directory=/tmp
     volumes:
@@ -15,7 +15,7 @@ services:
 
   backend:
     build: .
-    container_name: yoko-backend
+    container_name: backend
     image: backend
     command: bash -c "python manage.py database_connection &&
                       python manage.py migrate &&
