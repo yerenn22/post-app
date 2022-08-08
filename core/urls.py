@@ -25,8 +25,8 @@ router.register(r"users", UserViewSet, basename="users")
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("docs/", schema_view.with_ui("swagger", cache_timeout=0)),
     path("", include(router.urls)),
+    path("docs/", schema_view.with_ui("swagger", cache_timeout=0)),
     path("api-auth/", include("rest_framework.urls")),
 ]
 
