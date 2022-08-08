@@ -3,7 +3,7 @@ version: '3.9'
 services:
   db:
     container_name: postgres
-    image: postgres
+    image: postgres:14
     command: postgres -c stats_temp_directory=/tmp
     volumes:
       - ./data/db:/var/lib/postgresql/data
@@ -11,7 +11,10 @@ services:
       - POSTGRES_DB=yoko
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-    restart: always
+
+  redis:
+    container_name: redis
+    image: redis:7
 
   backend:
     build: .
