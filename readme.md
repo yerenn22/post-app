@@ -4,8 +4,6 @@ The backend part of the application for publishing posts, where posts are checke
 
 ![Swagger Image](./screenshot.png)
 
-## Table of contents
-
 ### Built with
 
 [![Django](https://img.shields.io/badge/django-092E20?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
@@ -47,11 +45,14 @@ docker-compose build
 docker-compose up
 ```
 
-### URLs
+### RESTful URLs
 
 - [http://localhost:8000](http://localhost:8000) - the main page with the API root
 - [http://localhost:8000/posts](http://localhost:8000/posts) - the page with the list of posts
 - [http://localhost:8000/users](http://localhost:8000/users) - the page with the list of users
 - [http://localhost:8000/admin](http://localhost:8000/admin) - the page with the list of posts
 
+### Contact
 
+- [Telegram](https://t.me/yerenn22)
+- [GitHub](https://github.com/yerenn22) - 
