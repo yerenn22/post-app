@@ -2,7 +2,8 @@ from rest_framework import mixins
 from rest_framework import viewsets
 
 from .models import Post
-from .serializers import PostSerializer
+from .permissions import PostPermissions
+from .serializers import PostCreateSerializer, PostUpdateSerializer
 
 
 class PostViewSet(
@@ -13,7 +14,16 @@ class PostViewSet(
     mixins.UpdateModelMixin,
     mixins.DestroyModelMixin,
 ):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+    permission_classes = (PostPermissions,)
 
-    permission_classes = ()
+    def get_queryset(self):
+        if self.request.user.is_staff:
+            return Post.objects.all()
+
+        return Post.objects.filter(is_published=True)
+
+    def get_serializer_class(self):
+        if self.action in ["create", "list"]:
+            return PostCreateSerializer
+
+        return PostUpdateSerializer
