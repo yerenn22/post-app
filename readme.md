@@ -55,4 +55,4 @@ docker-compose up
 ### Contact
 
 - [Telegram](https://t.me/yerenn22)
-- [GitHub](https://github.com/yerenn22) - 
+- [GitHub](https://github.com/yerenn22)
