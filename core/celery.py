@@ -1,3 +1,5 @@
+from __future__ import absolute_import, unicode_literals
+
 import os
 
 from celery import Celery
@@ -10,3 +12,9 @@ app.config_from_object("django.conf:settings", namespace="CELERY")
 
 app.autodiscover_tasks()
 
+app.conf.beat_schedule = {
+    "delete_unpublished_posts": {
+        "task": "delete_posts",
+        "schedule": 10.0,
+    },
+}
