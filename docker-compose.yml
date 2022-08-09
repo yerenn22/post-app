@@ -15,15 +15,8 @@ services:
   redis:
     container_name: redis
     image: redis:7
-    command: redis-server /redis/redis.conf --loglevel warning 
     volumes:
       - ./cache:/data
-      - ./redis.conf:/redis/redis.conf
-    env_file:
-      - ./env/redis
-    ports:
-      - "6379:6379"
-    restart: always
 
   django:
     build: .
@@ -48,13 +41,26 @@ services:
     build: .
     container_name: celery
     image: celery
-    command: bash -c "celery -A core worker --loglevel=info"
+    command: bash -c "celery -A core worker -l INFO"
     volumes:
       - .:/app
     env_file:
-      - ./env/celery
+      - ./env/django
     depends_on:
-      - db
+      - django
+      - redis
+
+  celery_beat:
+    build: .
+    container_name: celery_beat
+    image: celery_beat
+    command: bash -c "celery -A core beat -l INFO"
+    volumes:
+      - .:/app
+    env_file:
+      - ./env/django
+    depends_on:
+      - django
       - redis
 
 volumes:
