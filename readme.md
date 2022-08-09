@@ -1,5 +1,9 @@
 # Yoko - Technical Task
 
+The backend part of the application for publishing posts, where posts are checked by moderators or administrators and then published to the post list
+
+![Swagger Image](./screenshot.png)
+
 ## Table of contents
 
 ### Built with
@@ -42,3 +46,12 @@ cd yoko-post-app
 docker-compose build
 docker-compose up
 ```
+
+### URLs
+
+- [http://localhost:8000](http://localhost:8000) - the main page with the API root
+- [http://localhost:8000/posts](http://localhost:8000/posts) - the page with the list of posts
+- [http://localhost:8000/users](http://localhost:8000/users) - the page with the list of users
+- [http://localhost:8000/admin](http://localhost:8000/admin) - the page with the list of posts
+
+
