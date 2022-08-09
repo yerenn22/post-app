@@ -10,3 +10,7 @@ data
 # static files
 media
 static
+
+# cache
+cache
+redis.conf

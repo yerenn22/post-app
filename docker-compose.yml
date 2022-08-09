@@ -9,12 +9,21 @@ services:
       - ./data/db:/var/lib/postgresql/data
     ports:
       - "5432:5432"
-    environment:
+    env_file:
       - ./env/postgres
 
   redis:
     container_name: redis
     image: redis:7
+    command: redis-server /redis/redis.conf --loglevel warning 
+    volumes:
+      - ./cache:/data
+      - ./redis.conf:/redis/redis.conf
+    env_file:
+      - ./env/redis
+    ports:
+      - "6379:6379"
+    restart: always
 
   django:
     build: .
@@ -31,6 +40,19 @@ services:
       - "8000:8000"
     env_file:
       - ./env/django
+    depends_on:
+      - db
+      - redis
+
+  celery:
+    build: .
+    container_name: celery
+    image: celery
+    command: bash -c "celery -A core worker --loglevel=info"
+    volumes:
+      - .:/app
+    env_file:
+      - ./env/celery
     depends_on:
       - db
       - redis
