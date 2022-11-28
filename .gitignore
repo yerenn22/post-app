@@ -1,19 +1,14 @@
-# python binary
-__pycache__
+# Editor preferences
+.vscode/
 
-# postgres
-data
 
-# code style
-.flake8
+# Python cache files
+__pycache__/
 
-# static files
-media
-static
 
-# cache
-cache
-redis.conf
+# Environment variables
+.env
 
-# crontabs
-celerybeat-schedule
+
+# Local data
+postgres/

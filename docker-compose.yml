@@ -1,68 +1,39 @@
-version: "3.9"
+version: '3.8'
+
 
 services:
-  db:
+  postgres:
     container_name: postgres
-    image: postgres:14
-    command: postgres -c stats_temp_directory=/tmp
-    volumes:
-      - ./data/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    hostname: postgres
+    image: postgres:14-alpine
+    networks:
+      - post-app
     ports:
       - "5432:5432"
-    env_file:
-      - ./env/postgres
-
-  redis:
-    container_name: redis
-    image: redis:7
+    restart: always
     volumes:
-      - ./cache:/data
+      - ./postgres:/var/lib/postgresql/data
 
-  django:
-    build: .
-    container_name: django
-    image: django
-    command: bash -c "python manage.py database_connection &&
-                      python manage.py migrate &&
-                      python manage.py runserver 0.0.0.0:8000"
-    volumes:
-      - .:/app
-      - static:/app/static
-      - media:/app/media
+  app:
+    build: 
+      context: .
+      dockerfile: dockerfile
+    container_name: app
+    command: bash -c 'while !</dev/tcp/postgres/5432; do sleep 1; done; uvicorn main:app --host 0.0.0.0 --port 8000'
+    depends_on:
+      - postgres
+    hostname: app
+    networks:
+      - post-app
     ports:
       - "8000:8000"
-    env_file:
-      - ./env/django
-    depends_on:
-      - db
-      - redis
+    restart: always
 
-  celery:
-    build: .
-    container_name: celery
-    image: celery
-    command: bash -c "celery -A core worker -l INFO"
-    volumes:
-      - .:/app
-    env_file:
-      - ./env/django
-    depends_on:
-      - django
-      - redis
 
-  celery_beat:
-    build: .
-    container_name: celery_beat
-    image: celery_beat
-    command: bash -c "celery -A core beat -l INFO"
-    volumes:
-      - .:/app
-    env_file:
-      - ./env/django
-    depends_on:
-      - django
-      - redis
-
-volumes:
-  static:
-  media:
+networks:
+  post-app:
+    driver: bridge

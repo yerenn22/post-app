@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "post-app"
+version = "0.2.0"
+description = "backend application for post publishing (remastered)"
+authors = ["Yeren Kalibek <yerenn22@gmail.com>"]
+license = "UNLICENSED"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.88.0"
+gunicorn = "^20.1.0"
+psycopg2-binary = "^2.9.5"
+sqlmodel = "^0.0.8"
+uvicorn = {extras = ["standard"], version = "^0.20.0"}
+
+[tool.poetry.group.dev.dependencies]
+black = "^22.10.0"
+flake8 = "^6.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

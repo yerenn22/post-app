@@ -1,9 +1,0 @@
-SECRET_KEY=mnkt!g^n78zp4m86(yrrnxo8+%5n%79_h7-yd*vcj(5iw&2o!g
-
-ALLOWED_HOSTS=0.0.0.0 127.0.0.1 localhost [::1]
-
-POSTGRES_NAME=yoko
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=postgres
-
-CELERY_URL=redis://redis:6379/0
