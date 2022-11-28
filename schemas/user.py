@@ -1,7 +1,8 @@
 from sqlmodel import SQLModel
+from typing import Optional
 
 from models import UserBase
-from utils import AbstractEntity
+from utils.abstract import AbstractEntity
 
 
 class UserCreate(UserBase):
@@ -13,9 +14,9 @@ class UserRead(UserBase, AbstractEntity):
 
 
 class UserUpdate(SQLModel):
-    name: str
-    email: str
-    password: str
+    name: Optional[str]
+    email: Optional[str]
+    password: Optional[str]
 
     class Config:
         orm_mode = True

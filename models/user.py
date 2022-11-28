@@ -1,6 +1,6 @@
 from sqlmodel import SQLModel
 
-from utils import AbstractEntity
+from utils.abstract import AbstractEntity
 
 
 class UserBase(SQLModel):
